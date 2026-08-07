@@ -9,11 +9,69 @@ function Form() {
         address: "",
     });
 
+    const [errors, setErrors] = useState({
+        name: "",
+        email: "",
+        age: "",
+        gender: "",
+        course: "",
+        address: ""
+    });
+
     const handlechange = (e) => {
         setFormData({
             ...formData,
             [e.target.name]: e.target.value
         });
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // console.log("form is submitted");
+        const newErrors = {
+            name: "",
+            email: "",
+            age: "",
+            gender: "",
+            course: "",
+            address: ""
+        };
+
+        if(formData.name===""){
+            newErrors.name ="name is required"
+        }
+        if(formData.age===""){
+            newErrors.age="age is required"
+        }
+        if(formData.address===""){
+            newErrors.address==="address is empty"
+        }
+        if(formData.course===""){
+            newErrors.course="course is empty"
+        }
+        if(formData.gender===""){
+            newErrors.gender="gender is empty"
+        }
+        if (formData.name === "" ||
+            formData.age === "" ||
+            formData.email === "" ||
+            formData.address === "" ||
+            formData.gender === "" ||
+            formData.course === ""
+        ) {
+            alert("Please Enter all the fields");
+            return;
+        }
+        console.log(formData);
+
+        setFormData({
+            name: "",
+            email: "",
+            age: "",
+            gender: "",
+            course: "",
+            address: "",
+        })
     }
 
     // const handleEmailchange = (e) => {
@@ -60,28 +118,28 @@ function Form() {
             <h1>{formData.course}</h1>
             <h1>{formData.address}</h1>
 
-            <form className="border-2 border-blue-500 p-5 rounded-lg w-96 mt-10">
+            <form className="border-2 border-blue-500 p-5 rounded-lg w-96 mt-10" onSubmit={handleSubmit}>
                 <label>Name</label>
-                <input placeholder="Enter your name" onChange={handlechange} name='name' value={formData.name} className="border ml-5"/>
+                <input placeholder="Enter your name" onChange={handlechange} name='name' value={formData.name} className="border ml-5" />
                 <br /><br />
 
                 <label>Email</label>
-                <input placeholder="Enter your email" onChange={handlechange} name='email' value={formData.email} className="border ml-5"/>
+                <input placeholder="Enter your email" onChange={handlechange} name='email' value={formData.email} className="border ml-5" />
                 <br /><br />
 
                 <label>Age</label>
-                <input placeholder="Enter your age" type="number" onChange={handlechange} name='age' value={formData.age} className="border ml-5"/>
+                <input placeholder="Enter your age" type="number" onChange={handlechange} name='age' value={formData.age} className="border ml-5" />
                 <br /><br />
 
                 <label>Gender</label>
-                <input type="radio" name="gender" value="Male"  onChange={handlechange} className="border ml-5"/>
+                <input type="radio" name="gender" value="Male" onChange={handlechange} className="border ml-5" />
                 <label>Male</label>
-                <input type="radio" name="gender" value="Female" onChange={handlechange} className="border ml-5"/>
+                <input type="radio" name="gender" value="Female" onChange={handlechange} className="border ml-5" />
                 <label>Female</label>
                 <br /><br />
 
                 <label>Course</label>
-                <select onChange={handlechange} name="course"className="border ml-5" >
+                <select onChange={handlechange} name="course" value={formData.course} className="border ml-5" >
                     <option value='CSE'>CSE</option>
                     <option value='ECE'>ECE</option>
                     <option value='AIDS'>AIDS</option>
@@ -90,10 +148,10 @@ function Form() {
                 <br /><br />
 
                 <label>Address</label>
-                <textarea rows="4" cols="30" onChange={handlechange} name="address " className="border ml-5"></textarea>
-                <br/><br/>
+                <textarea rows="4" cols="30" onChange={handlechange} value={formData.address} name="address" className="border ml-5"></textarea>
+                <br /><br />
 
-                <button className="border rounded-lg flex-center">Submit</button>
+                <button className="border rounded-lg flex flex-center" >Submit</button>
 
             </form>
 
