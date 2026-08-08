@@ -37,32 +37,37 @@ function Form() {
             address: ""
         };
 
-        if(formData.name===""){
-            newErrors.name ="name is required"
+        if (formData.name === "") {
+            newErrors.name = "name is required"
         }
-        if(formData.age===""){
-            newErrors.age="age is required"
+        if (formData.age === "") {
+            newErrors.age = "age is required"
         }
-        if(formData.address===""){
-            newErrors.address==="address is empty"
+        if (formData.address === "") {
+            newErrors.address = "address is empty"
         }
-        if(formData.course===""){
-            newErrors.course="course is empty"
+        if (formData.course === "") {
+            newErrors.course = "course is empty"
         }
-        if(formData.gender===""){
-            newErrors.gender="gender is empty"
+        if (formData.gender === "") {
+            newErrors.gender = "gender is empty"
         }
-        if (formData.name === "" ||
-            formData.age === "" ||
-            formData.email === "" ||
-            formData.address === "" ||
-            formData.gender === "" ||
-            formData.course === ""
-        ) {
-            alert("Please Enter all the fields");
+
+        setErrors(newErrors);
+        // if (formData.name === "" ||
+        //     formData.age === "" ||
+        //     formData.email === "" ||
+        //     formData.address === "" ||
+        //     formData.gender === "" ||
+        //     formData.course === ""
+        // ) {
+        //     alert("Please Enter all the fields");
+        //     return;
+        // }
+        console.log(formData);
+        if (Object.values(newErrors).some(error => error !== "")) {
             return;
         }
-        console.log(formData);
 
         setFormData({
             name: "",
