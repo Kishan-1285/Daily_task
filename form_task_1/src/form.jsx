@@ -23,6 +23,10 @@ function Form() {
             ...formData,
             [e.target.name]: e.target.value
         });
+        setErrors({
+            ...errors,
+            [e.target.name]: ""
+        });
     }
 
     const handleSubmit = (e) => {
@@ -138,14 +142,14 @@ function Form() {
 
                 <label>Email</label>
                 <input placeholder="Enter your email" onChange={handlechange} name='email' value={formData.email} className="border ml-5" />
-                {errors.email &&(
+                {errors.email && (
                     <p className="text-red-500">{errors.email}</p>
                 )}
                 <br /><br />
 
                 <label>Age</label>
                 <input placeholder="Enter your age" type="number" onChange={handlechange} name='age' value={formData.age} className="border ml-5" />
-                {errors.age &&(
+                {errors.age && (
                     <p className="text-red-500">{errors.age}</p>
                 )}
                 <br /><br />
@@ -155,7 +159,7 @@ function Form() {
                 <label>Male</label>
                 <input type="radio" name="gender" value="Female" onChange={handlechange} className="border ml-5" />
                 <label>Female</label>
-                {errors.gender &&(
+                {errors.gender && (
                     <p className="text-red-500">{errors.gender}</p>
                 )}
                 <br /><br />
@@ -167,14 +171,14 @@ function Form() {
                     <option value='AIDS'>AIDS</option>
                     <option value='CSBS'>CSBS</option>
                 </select>
-                {errors.course &&(
+                {errors.course && (
                     <p className="text-red-500">{errors.course}</p>
                 )}
                 <br /><br />
 
                 <label>Address</label>
                 <textarea rows="4" cols="30" onChange={handlechange} value={formData.address} name="address" className="border ml-5"></textarea>
-                {errors.address &&(
+                {errors.address && (
                     <p className="text-red-500">{errors.address}</p>
                 )}
                 <br /><br />
