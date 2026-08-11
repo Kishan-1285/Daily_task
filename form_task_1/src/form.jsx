@@ -18,6 +18,8 @@ function Form() {
         address: ""
     });
 
+    const [loading,setLoading] = useState(false);
+
     const handlechange = (e) => {
         setFormData({
             ...formData,
@@ -41,14 +43,23 @@ function Form() {
             address: ""
         };
 
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const namePattern = /^[A-Za-z ]+$/;
+
         if (formData.name === "") {
             newErrors.name = "*name is required"
-        }
-        if (formData.age === "") {
-            newErrors.age = "age is required"
+        }else if(!namePattern.test(formData.name)){
+            newErrors.name="Enter a valid name"
         }
         if (formData.email === "") {
             newErrors.email = "email is required"
+        } else if (!emailPattern.test(formData.email)) {
+            newErrors.email = "Enter a valid email";
+        }
+        if (formData.age === "") {
+            newErrors.age = "age is required"
+        }else if(formData.age < 15 || formData.age > 85){
+            newErrors.age = "Enter a valid age"
         }
         if (formData.address === "") {
             newErrors.address = "address is empty"
@@ -74,6 +85,9 @@ function Form() {
         if (Object.values(newErrors).some(error => error !== "")) {
             return;
         }
+
+        setLoading(true);
+
         console.log(formData);
 
         setFormData({
@@ -130,7 +144,7 @@ function Form() {
             <h1>{formData.course}</h1>
             <h1>{formData.address}</h1>
 
-            <form className="border-2 border-blue-500 p-5 rounded-lg w-96 mt-10" onSubmit={handleSubmit}>
+            <form className="border-2 border-yellow-500 p-5 rounded-lg w-96 mt-10" onSubmit={handleSubmit}>
                 <label>Name</label>
                 <input placeholder="Enter your name" onChange={handlechange} name='name' value={formData.name} className="border ml-5" />
                 {errors.name && (
@@ -155,9 +169,9 @@ function Form() {
                 <br /><br />
 
                 <label>Gender</label>
-                <input type="radio" name="gender" value="Male" onChange={handlechange} className="border ml-5" />
+                <input type="radio" name="gender" value="Male" onChange={handlechange}  checked={formData.gender === "Male"} className="border ml-5" />
                 <label>Male</label>
-                <input type="radio" name="gender" value="Female" onChange={handlechange} className="border ml-5" />
+                <input type="radio" name="gender" value="Female" onChange={handlechange}  checked={formData.gender === "Female"} className="border ml-5" />
                 <label>Female</label>
                 {errors.gender && (
                     <p className="text-red-500">{errors.gender}</p>
@@ -166,6 +180,7 @@ function Form() {
 
                 <label>Course</label>
                 <select onChange={handlechange} name="course" value={formData.course} className="border ml-5" >
+                    <option value="">Select Option</option>
                     <option value='CSE'>CSE</option>
                     <option value='ECE'>ECE</option>
                     <option value='AIDS'>AIDS</option>
@@ -183,7 +198,9 @@ function Form() {
                 )}
                 <br /><br />
 
-                <button className="border rounded-lg flex flex-center" >Submit</button>
+                <button disabled={loading} className="border rounded-lg flex flex-center " >
+                    {loading? "Submitting..." : "submit"}
+                </button>
 
             </form>
 
