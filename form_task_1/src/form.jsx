@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 function Form() {
     const [formData, setFormData] = useState({
@@ -18,7 +19,9 @@ function Form() {
         address: ""
     });
 
-    const [loading,setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
+
+    const [success, setSuccess] = useState();
 
     const handlechange = (e) => {
         setFormData({
@@ -29,9 +32,11 @@ function Form() {
             ...errors,
             [e.target.name]: ""
         });
+
+        setSuccess("");
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         // console.log("form is submitted");
         const newErrors = {
@@ -48,8 +53,8 @@ function Form() {
 
         if (formData.name === "") {
             newErrors.name = "*name is required"
-        }else if(!namePattern.test(formData.name)){
-            newErrors.name="Enter a valid name"
+        } else if (!namePattern.test(formData.name)) {
+            newErrors.name = "Enter a valid name"
         }
         if (formData.email === "") {
             newErrors.email = "email is required"
@@ -58,7 +63,7 @@ function Form() {
         }
         if (formData.age === "") {
             newErrors.age = "age is required"
-        }else if(formData.age < 15 || formData.age > 85){
+        } else if (formData.age < 15 || formData.age > 85) {
             newErrors.age = "Enter a valid age"
         }
         if (formData.address === "") {
@@ -88,18 +93,46 @@ function Form() {
 
         setLoading(true);
 
-        console.log(formData);
+        try {
+            const response = await axios.post(
+                "http://localhost:5000/users",
+                formData
+            );
+            console.log(response.data);
+            setSuccess("form Submitted successfully");
+            setFormData({
+                name: "",
+                email: "",
+                age: "",
+                gender: "",
+                course: "",
+                address: "",
+            });
+        }
+        catch (error) {
+            console.log(error);
+            setSuccess("Something Went wrong");
+        }
+        finally {
+            setLoading(false);
+        }
 
-        setFormData({
-            name: "",
-            email: "",
-            age: "",
-            gender: "",
-            course: "",
-            address: "",
-        })
+        // setTimeout(() => {
+        //     console.log(formData);
+        //     setSuccess("Form submitted successfully!");
+
+        //     setLoading(false);
+
+        //     setFormData({
+        //         name: "",
+        //         email: "",
+        //         age: "",
+        //         gender: "",
+        //         course: "",
+        //         address: "",
+        //     });
+        // }, 2000);
     }
-
     // const handleEmailchange = (e) => {
     //     setFormData({
     //         ...formData,
@@ -144,6 +177,12 @@ function Form() {
             <h1>{formData.course}</h1>
             <h1>{formData.address}</h1>
 
+            {success && (
+                <p className="text-green-500">
+                    {success}
+                </p>
+            )}
+
             <form className="border-2 border-yellow-500 p-5 rounded-lg w-96 mt-10" onSubmit={handleSubmit}>
                 <label>Name</label>
                 <input placeholder="Enter your name" onChange={handlechange} name='name' value={formData.name} className="border ml-5" />
@@ -169,9 +208,9 @@ function Form() {
                 <br /><br />
 
                 <label>Gender</label>
-                <input type="radio" name="gender" value="Male" onChange={handlechange}  checked={formData.gender === "Male"} className="border ml-5" />
+                <input type="radio" name="gender" value="Male" onChange={handlechange} checked={formData.gender === "Male"} className="border ml-5" />
                 <label>Male</label>
-                <input type="radio" name="gender" value="Female" onChange={handlechange}  checked={formData.gender === "Female"} className="border ml-5" />
+                <input type="radio" name="gender" value="Female" onChange={handlechange} checked={formData.gender === "Female"} className="border ml-5" />
                 <label>Female</label>
                 {errors.gender && (
                     <p className="text-red-500">{errors.gender}</p>
@@ -199,12 +238,9 @@ function Form() {
                 <br /><br />
 
                 <button disabled={loading} className="border rounded-lg flex flex-center " >
-                    {loading? "Submitting..." : "submit"}
+                    {loading ? "Submitting..." : "submit"}
                 </button>
-
             </form>
-
-
         </>
     )
 }
