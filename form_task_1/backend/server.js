@@ -29,6 +29,14 @@ app.get('/users', (req, res) => {
     res.status(200).json(users);
 });
 
+app.delete('./users/:id', (req, res) => {
+    const id = req.params.id;
+    console.log(id);
+    res.json({
+        message: "delete route working"
+    });
+})
+
 
 app.listen("5000", () => {
     console.log("App is running on the port 5000");
