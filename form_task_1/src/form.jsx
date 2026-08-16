@@ -186,6 +186,7 @@ function Form() {
             <form className="border-2 border-yellow-500 p-5 rounded-lg w-96 mt-10" onSubmit={handleSubmit}>
                 <label>Name</label>
                 <input placeholder="Enter your name" onChange={handlechange} name='name' value={formData.name} className="border ml-5" />
+                
                 {errors.name && (
                     <p className="text-red-500">
                         {errors.name}
