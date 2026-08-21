@@ -12,6 +12,8 @@ function Todo() {
     const [empty, setEmpty] = useState("");
     const [EditingId, setEditingId] = useState(null);
 
+
+
     const handleChange = (e) => {
         setInput(e.target.value);
     }
@@ -28,6 +30,18 @@ function Todo() {
             return;
         }
         setEmpty("");
+
+        if(EditingId!==null){
+            setData(
+                data.map((todo)=>
+                    todo.id===EditingId 
+                        ?{...todo,text:input} 
+                        : todo
+            ));
+            setEditingId(null);
+            setInput("");
+            return;
+        }
         setData([...data, newTodo]);
         setInput("");
     }
@@ -46,7 +60,6 @@ function Todo() {
 
     return (
         <>
-
             <ul className="border-2 border-purple-500 p-3 rounded-lg w-96 mt-10">
                 {data.map((datas) => (
                     <li key={datas.id}>
@@ -55,13 +68,14 @@ function Todo() {
                         <button className="border-2 border-purple-500 rounded-lg" onClick={() => handleEdit(datas.id)}>Edit</button>
                     </li>
                 ))}
-
             </ul>
             <br /><br />
 
 
             <input className="border-2 border-green-500 rounded-lg" value={input} onChange={handleChange} placeholder="Enter the task..." />
-            <button className="border-2 border-purple-500 rounded-lg" onClick={handleUpdate}>Add</button>
+            <button className="border-2 border-purple-500 rounded-lg" onClick={handleUpdate}>
+                {EditingId !== null ? "Update" : "Add"}
+            </button>
             {empty && (<p className="text-red-500">{empty}</p>)}
         </>
     )
