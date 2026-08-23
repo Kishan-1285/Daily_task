@@ -18,10 +18,7 @@ function Todo() {
         setInput(e.target.value);
     }
 
-    const newTodo = {
-        id: crypto.randomUUID(),
-        text: input
-    }
+
 
     const handleUpdate = (e) => {
         e.preventDefault();
@@ -31,17 +28,23 @@ function Todo() {
         }
         setEmpty("");
 
-        if(EditingId!==null){
+        if (EditingId !== null) {
             setData(
-                data.map((todo)=>
-                    todo.id===EditingId 
-                        ?{...todo,text:input} 
+                data.map((todo) =>
+                    todo.id === EditingId
+                        ? { ...todo, text: input }
                         : todo
-            ));
+                ));
             setEditingId(null);
             setInput("");
             return;
         }
+
+        const newTodo = {
+            id: crypto.randomUUID(),
+            text: input
+        }
+
         setData([...data, newTodo]);
         setInput("");
     }
@@ -59,25 +62,25 @@ function Todo() {
     }
 
     return (
-        <>
-            <ul className="border-2 border-purple-500 p-3 rounded-lg w-96 mt-10">
+        <div className="p-10 text-center">
+            <ul className="border-2 border-purple-500 p-3 rounded-lg w-96 mt-10 mx-auto">
                 {data.map((datas) => (
-                    <li key={datas.id}>
+                    <li key={datas.id} className="mb-3">
                         {datas.text}
-                        <button className="border-2 border-purple-500 rounded-lg" onClick={() => handleDelete(datas.id)}>Delete</button>
-                        <button className="border-2 border-purple-500 rounded-lg" onClick={() => handleEdit(datas.id)}>Edit</button>
+                        <button className="border-2 border-purple-500 rounded-lg px-3 py-1 ml-2" onClick={() => handleDelete(datas.id)}>Delete</button>
+                        <button className="border-2 border-purple-500 rounded-lg px-3 py-1 ml-2" onClick={() => handleEdit(datas.id)}>Edit</button>
                     </li>
                 ))}
             </ul>
-            <br /><br />
 
+            <div className="mt-4"></div>
 
-            <input className="border-2 border-green-500 rounded-lg" value={input} onChange={handleChange} placeholder="Enter the task..." />
-            <button className="border-2 border-purple-500 rounded-lg" onClick={handleUpdate}>
+            <input className="border-2 border-green-500 rounded-lg px-3 py-2" value={input} onChange={handleChange} placeholder="Enter the task..." />
+            <button className="border-2 border-purple-500 rounded-lg px-3 py-2 ml-2" onClick={handleUpdate}>
                 {EditingId !== null ? "Update" : "Add"}
             </button>
-            {empty && (<p className="text-red-500">{empty}</p>)}
-        </>
+            {empty && (<p className="text-red-500 ">{empty}</p>)}
+        </div>
     )
 }
 
