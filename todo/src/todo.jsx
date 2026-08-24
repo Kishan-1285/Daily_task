@@ -18,8 +18,6 @@ function Todo() {
         setInput(e.target.value);
     }
 
-
-
     const handleUpdate = (e) => {
         e.preventDefault();
         if (input.trim() === "") {
