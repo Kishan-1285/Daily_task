@@ -5,14 +5,13 @@ function Todo() {
     const [data, setData] = useState([
         { id: 1, text: "Learn React" },
         { id: 2, text: "Practice JavaScript" },
-        { id: 3, text: "Build a project" }
+        { id: 3, text: "Build a project" },
+        { id: 4, text: "learn Node" },
     ]);
 
     const [input, setInput] = useState("");
     const [empty, setEmpty] = useState("");
     const [EditingId, setEditingId] = useState(null);
-
-
 
     const handleChange = (e) => {
         setInput(e.target.value);
