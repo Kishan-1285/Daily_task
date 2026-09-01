@@ -29,7 +29,7 @@ const Student = () => {
 
             <input type='text'
                 onChange={(e) => setName(e.target.value)}
-                value='kishan'
+                value={name}
                 placeholder='Enter your name'/>
 
             <button onClick={handleAdd}>Add</button>
