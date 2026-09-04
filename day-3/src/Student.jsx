@@ -1,8 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-
 const Student = () => {
-
     const [list, setList] = useState([
         { id: 1, name: 'kishan' },
         { id: 2, name: 'Ashwin' },
