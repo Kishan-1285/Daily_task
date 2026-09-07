@@ -1,11 +1,12 @@
-import React from 'react'
-import StudentSearch from './StudentSearch'
+import React from "react";
+import StudentSearch from "./StudentSearch";
 
 const App = () => {
   return (
     <>
-      <StudentSearch/>
+      <StudentSearch />
     </>
-  )
-}
-export default App
+  );
+};
+
+export default App;

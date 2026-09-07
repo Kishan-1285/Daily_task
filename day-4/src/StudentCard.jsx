@@ -1,10 +1,9 @@
 import React from 'react'
-
-const StudentCard = () => {
+const StudentCard = ({student}) => {
   return (
     <>
-      <h2>Kishan</h2>
-      <p>ID: 1</p>
+      <h2>{student.name}</h2>
+      <p>ID: {student.id}</p>
     </>
   )
 }
