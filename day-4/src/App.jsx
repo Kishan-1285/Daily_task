@@ -1,6 +1,5 @@
 import React from "react";
 import StudentSearch from "./StudentSearch";
-
 const App = () => {
   return (
     <>
@@ -8,5 +7,4 @@ const App = () => {
     </>
   );
 };
-
 export default App;
