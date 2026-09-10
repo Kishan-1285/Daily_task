@@ -9,7 +9,7 @@ const StudentSearch = () => {
         { id: 4, name: "Harry" },
         { id: 5, name: "Sabreen" }
     ])
-
+    
     const [search, setSearch] = useState("");
 
     const filteredStudent = student.filter((students) => {
