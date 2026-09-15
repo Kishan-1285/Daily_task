@@ -1,8 +1,10 @@
 import React from 'react'
-
+import StudentSorting from './StudentSorting'
 const App = () => {
   return (
-    <div>App</div>
+    <>
+      <StudentSorting/>
+    </>
   )
 }
 
