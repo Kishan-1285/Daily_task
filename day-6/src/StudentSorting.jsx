@@ -38,10 +38,9 @@ const StudentSorting = () => {
     });
 
     // const sortValue = sortBy === 'name' ? sortedStudent : sortedStudents;
-
     // console.log("sortedStudents:", sortedStudents);
     // console.log("students:", students);
-    
+  
     return (
         <>
             <h1>Student List</h1>
