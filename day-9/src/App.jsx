@@ -1,8 +1,10 @@
 import React from 'react'
-
+import Checkboxes from './Checkboxes'
 const App = () => {
   return (
-    <div>App</div>
+    <>
+      <Checkboxes/>
+    </>
   )
 }
 
