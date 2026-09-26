@@ -22,7 +22,9 @@ const Checkboxes = () => {
                 Accept the terms and conditions
             </label>
 
-            <p className={`ml-2 mt-2 text-sm ${isChecked ? "text-green-600" : "text-red-600"}`}>{isChecked ? 'Terms accepted' : 'Please accept the terms'}</p>
+            <p className={`ml-2 mt-2 text-sm ${isChecked ? "text-green-600" : "text-red-600"}`}>
+                {isChecked ? 'Terms accepted' : 'Please accept the terms'}
+            </p>
             <button disabled={!isChecked} className='border-2 rounded-md p-1 hover:bg-blue-200 hover:text-black transition-colors duration-200 text-sm m-2 disabled:opacity-40 disabled:cursor-not-allowed'
                 onClick={() => setIsConti(true)}
             >
@@ -32,7 +34,6 @@ const Checkboxes = () => {
             {isChecked && (<p className='text-sm m-2'>
                 {isConti ? "You can now continue!" : ""}
             </p>)}
-
         </div>
     )
 }
