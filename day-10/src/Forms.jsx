@@ -104,7 +104,6 @@ const Forms = () => {
                     <div key={index}>
                         <p>{index + 1}.</p>
                         <p>{user.name}</p>
-
                         <p>{user.email}</p>
                     </div>
                 ))
